@@ -1,0 +1,5 @@
+rootProject.name = 'MonoplaceF1'
+include 'ModuleBase'
+include 'ModuleTUI'
+include('ModuleAPI')
+

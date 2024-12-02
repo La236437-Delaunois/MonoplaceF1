@@ -1,0 +1,2 @@
+rootProject.name = 'ModuleAPI'
+include(':ModuleBase')
