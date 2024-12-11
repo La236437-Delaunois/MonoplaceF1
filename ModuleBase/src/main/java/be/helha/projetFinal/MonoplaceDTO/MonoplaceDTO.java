@@ -11,7 +11,6 @@ public class MonoplaceDTO {
     private String nomMonoplace;
     private String ecurie;
     private String nomMoteur;
-    private String modeleMoteur;
     private String aileronAvant;
     private String aileronArriere;
     private String freins;
@@ -32,7 +31,6 @@ public class MonoplaceDTO {
      * @param nomMonoplace le nom de la monoplace
      * @param ecurie le nom de l'écurie
      * @param nomMoteur le nom du moteur
-     * @param modeleMoteur le modèle du moteur
      * @param aileronAvant le type d'aileron avant
      * @param aileronArriere le type d'aileron arrière
      * @param freins le type de freins
@@ -46,26 +44,31 @@ public class MonoplaceDTO {
      * @param ingenieurCourse le nom de l'ingénieur de course
      * @param entrepot le nom de l'entrepôt
      * @param pilote le nom du pilote
+     *
+     * @throws EmptyArgumentException si un des paramètres est vide
      */
-    public MonoplaceDTO(String nomMonoplace, String ecurie, String nomMoteur, String modeleMoteur, String aileronAvant, String aileronArriere, String freins, String boiteVitesse, String pneus, double poids, double capaciteMaxReservoir, String chassis, String suspension, String fondPlat, String ingenieurCourse, String entrepot, String pilote) {
-        this.idMonoplace = -1;
-        this.nomMonoplace = nomMonoplace;
-        this.ecurie = ecurie;
-        this.nomMoteur = nomMoteur;
-        this.modeleMoteur = modeleMoteur;
-        this.aileronAvant = aileronAvant;
-        this.aileronArriere = aileronArriere;
-        this.freins = freins;
-        this.boiteVitesse = boiteVitesse;
-        this.pneus = pneus;
-        this.poids = poids;
-        this.capaciteMaxReservoir = capaciteMaxReservoir;
-        this.chassis = chassis;
-        this.suspension = suspension;
-        this.fondPlat = fondPlat;
-        this.ingenieurCourse = ingenieurCourse;
-        this.entrepot = entrepot;
-        this.pilote = pilote;
+    public MonoplaceDTO(String nomMonoplace, String ecurie, String nomMoteur, String aileronAvant, String aileronArriere, String freins, String boiteVitesse, String pneus, double poids, double capaciteMaxReservoir, String chassis, String suspension, String fondPlat, String ingenieurCourse, String entrepot, String pilote) throws  EmptyArgumentException {
+        if (nomMonoplace.isEmpty() || ecurie.isEmpty() || nomMoteur.isEmpty() || aileronAvant.isEmpty() || aileronArriere.isEmpty() || freins.isEmpty() || boiteVitesse.isEmpty() || pneus.isEmpty() || chassis.isEmpty() || suspension.isEmpty() || fondPlat.isEmpty() || ingenieurCourse.isEmpty() || entrepot.isEmpty() || pilote.isEmpty()) {
+            throw new EmptyArgumentException("Tous les champs doivent être remplis.");
+        }else {
+            this.idMonoplace = -1;
+            this.nomMonoplace = nomMonoplace;
+            this.ecurie = ecurie;
+            this.nomMoteur = nomMoteur;
+            this.aileronAvant = aileronAvant;
+            this.aileronArriere = aileronArriere;
+            this.freins = freins;
+            this.boiteVitesse = boiteVitesse;
+            this.pneus = pneus;
+            this.poids = poids;
+            this.capaciteMaxReservoir = capaciteMaxReservoir;
+            this.chassis = chassis;
+            this.suspension = suspension;
+            this.fondPlat = fondPlat;
+            this.ingenieurCourse = ingenieurCourse;
+            this.entrepot = entrepot;
+            this.pilote = pilote;
+        }
     }
 
     /**
@@ -76,14 +79,32 @@ public class MonoplaceDTO {
      * @param pilote le nom du pilote
      * @param ingenieurCourse le nom de l'ingénieur de course
      * @param entrepot le nom de l'entrepôt
+     *
+     * @throws EmptyArgumentException si un des paramètres est vide
      */
-    public MonoplaceDTO(String nomMonoplace, String ecurie, String pilote, String ingenieurCourse, String entrepot) {
-        this.idMonoplace = -1;
-        this.nomMonoplace = nomMonoplace;
-        this.ecurie = ecurie;
-        this.pilote = pilote;
-        this.ingenieurCourse = ingenieurCourse;
-        this.entrepot = entrepot;
+    public MonoplaceDTO(String nomMonoplace, String ecurie, String pilote, String ingenieurCourse, String entrepot) throws EmptyArgumentException {
+        if(nomMonoplace.isEmpty() || ecurie.isEmpty() || pilote.isEmpty() || ingenieurCourse.isEmpty() || entrepot.isEmpty()) {
+            throw new EmptyArgumentException("Tous les champs doivent être remplis.");
+        }else {
+            this.idMonoplace = -1;
+            this.nomMonoplace = nomMonoplace;
+            this.ecurie = ecurie;
+            this.pilote = pilote;
+            this.ingenieurCourse = ingenieurCourse;
+            this.entrepot = entrepot;
+            this.nomMoteur = "non défini";
+            this.aileronAvant = "non défini";
+            this.aileronArriere = "non défini";
+            this.freins = "non défini";
+            this.boiteVitesse = "non défini";
+            this.pneus = "non défini";
+            this.poids = 0;
+            this.capaciteMaxReservoir = 0;
+            this.chassis = "non défini";
+            this.suspension = "non défini";
+            this.fondPlat = "non défini";
+
+        }
     }
 
     /**
@@ -162,25 +183,6 @@ public class MonoplaceDTO {
     }
 
     /**
-     * Obtient le modèle du moteur.
-     *
-     * @return le modèle du moteur
-     */
-    public String getModeleMoteur() {
-        return modeleMoteur;
-    }
-
-    /**
-     * Définit le modèle du moteur.
-     *
-     * @param modeleMoteur le modèle du moteur
-     */
-    public void setModeleMoteur(String modeleMoteur) throws EmptyArgumentException {
-        if(modeleMoteur.isEmpty()) throw new EmptyArgumentException("Le modèle du moteur ne peut pas être vide.");
-        else this.modeleMoteur = modeleMoteur;
-    }
-
-    /**
      * Obtient le type d'aileron avant.
      *
      * @return le type d'aileron avant
@@ -252,7 +254,7 @@ public class MonoplaceDTO {
      * @param boiteVitesse le type de boîte de vitesse
      */
     public void setBoiteVitesse(String boiteVitesse) throws EmptyArgumentException {
-        if(boiteVitesse.isEmpty()) throw new EmptyArgumentException("Le type de boîte de vitesse ne peut pas être vide.");
+        if(boiteVitesse.isEmpty()) throw new EmptyArgumentException("Le type de boîte de vitesses ne peut pas être vide.");
         else this.boiteVitesse = boiteVitesse;
     }
 
@@ -441,7 +443,6 @@ public class MonoplaceDTO {
                 "    Nom Monoplace         = '" + nomMonoplace + "'\n" +
                 "    Écurie                = '" + ecurie + "'\n" +
                 "    Nom Moteur            = '" + nomMoteur + "'\n" +
-                "    Modèle Moteur         = '" + modeleMoteur + "'\n" +
                 "    Aileron Avant         = '" + aileronAvant + "'\n" +
                 "    Aileron Arrière       = '" + aileronArriere + "'\n" +
                 "    Freins                = '" + freins + "'\n" +
