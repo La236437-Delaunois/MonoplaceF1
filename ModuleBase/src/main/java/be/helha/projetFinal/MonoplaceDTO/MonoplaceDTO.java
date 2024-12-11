@@ -1,5 +1,8 @@
 package be.helha.projetFinal.MonoplaceDTO;
 
+import exceptions.EmptyArgumentException;
+import exceptions.NegativeArgumentException;
+
 /**
  * Classe MonoplaceDTO représente une monoplace de Formule 1 avec ses caractéristiques.
  */
@@ -45,6 +48,7 @@ public class MonoplaceDTO {
      * @param pilote le nom du pilote
      */
     public MonoplaceDTO(String nomMonoplace, String ecurie, String nomMoteur, String modeleMoteur, String aileronAvant, String aileronArriere, String freins, String boiteVitesse, String pneus, double poids, double capaciteMaxReservoir, String chassis, String suspension, String fondPlat, String ingenieurCourse, String entrepot, String pilote) {
+        this.idMonoplace = -1;
         this.nomMonoplace = nomMonoplace;
         this.ecurie = ecurie;
         this.nomMoteur = nomMoteur;
@@ -74,6 +78,7 @@ public class MonoplaceDTO {
      * @param entrepot le nom de l'entrepôt
      */
     public MonoplaceDTO(String nomMonoplace, String ecurie, String pilote, String ingenieurCourse, String entrepot) {
+        this.idMonoplace = -1;
         this.nomMonoplace = nomMonoplace;
         this.ecurie = ecurie;
         this.pilote = pilote;
@@ -113,8 +118,9 @@ public class MonoplaceDTO {
      *
      * @param nomMonoplace le nom de la monoplace
      */
-    public void setNomMonoplace(String nomMonoplace) {
-        this.nomMonoplace = nomMonoplace;
+    public void setNomMonoplace(String nomMonoplace) throws EmptyArgumentException {
+        if(nomMonoplace.isEmpty()) throw new EmptyArgumentException("Le nom de la monoplace ne peut pas être vide.");
+        else this.nomMonoplace = nomMonoplace;
     }
 
     /**
@@ -131,8 +137,9 @@ public class MonoplaceDTO {
      *
      * @param ecurie le nom de l'écurie
      */
-    public void setEcurie(String ecurie) {
-        this.ecurie = ecurie;
+    public void setEcurie(String ecurie) throws EmptyArgumentException {
+        if(ecurie.isEmpty()) throw new EmptyArgumentException("Le nom de l'écurie ne peut pas être vide.");
+        else this.ecurie = ecurie;
     }
 
     /**
@@ -149,8 +156,9 @@ public class MonoplaceDTO {
      *
      * @param nomMoteur le nom du moteur
      */
-    public void setNomMoteur(String nomMoteur) {
-        this.nomMoteur = nomMoteur;
+    public void setNomMoteur(String nomMoteur) throws EmptyArgumentException {
+        if(nomMoteur.isEmpty()) throw new EmptyArgumentException("Le nom du moteur ne peut pas être vide.");
+        else this.nomMoteur = nomMoteur;
     }
 
     /**
@@ -167,8 +175,9 @@ public class MonoplaceDTO {
      *
      * @param modeleMoteur le modèle du moteur
      */
-    public void setModeleMoteur(String modeleMoteur) {
-        this.modeleMoteur = modeleMoteur;
+    public void setModeleMoteur(String modeleMoteur) throws EmptyArgumentException {
+        if(modeleMoteur.isEmpty()) throw new EmptyArgumentException("Le modèle du moteur ne peut pas être vide.");
+        else this.modeleMoteur = modeleMoteur;
     }
 
     /**
@@ -185,8 +194,9 @@ public class MonoplaceDTO {
      *
      * @param aileronAvant le type d'aileron avant
      */
-    public void setAileronAvant(String aileronAvant) {
-        this.aileronAvant = aileronAvant;
+    public void setAileronAvant(String aileronAvant) throws EmptyArgumentException {
+        if(aileronAvant.isEmpty()) throw new EmptyArgumentException("Le type d'aileron avant ne peut pas être vide.");
+        else this.aileronAvant = aileronAvant;
     }
 
     /**
@@ -203,8 +213,9 @@ public class MonoplaceDTO {
      *
      * @param aileronArriere le type d'aileron arrière
      */
-    public void setAileronArriere(String aileronArriere) {
-        this.aileronArriere = aileronArriere;
+    public void setAileronArriere(String aileronArriere) throws EmptyArgumentException {
+        if(aileronArriere.isEmpty()) throw new EmptyArgumentException("Le type d'aileron arrière ne peut pas être vide.");
+        else this.aileronArriere = aileronArriere;
     }
 
     /**
@@ -221,8 +232,9 @@ public class MonoplaceDTO {
      *
      * @param freins le type de freins
      */
-    public void setFreins(String freins) {
-        this.freins = freins;
+    public void setFreins(String freins) throws EmptyArgumentException {
+        if(freins.isEmpty()) throw new EmptyArgumentException("Le type de freins ne peut pas être vide.");
+        else this.freins = freins;
     }
 
     /**
@@ -239,8 +251,9 @@ public class MonoplaceDTO {
      *
      * @param boiteVitesse le type de boîte de vitesse
      */
-    public void setBoiteVitesse(String boiteVitesse) {
-        this.boiteVitesse = boiteVitesse;
+    public void setBoiteVitesse(String boiteVitesse) throws EmptyArgumentException {
+        if(boiteVitesse.isEmpty()) throw new EmptyArgumentException("Le type de boîte de vitesse ne peut pas être vide.");
+        else this.boiteVitesse = boiteVitesse;
     }
 
     /**
@@ -257,8 +270,9 @@ public class MonoplaceDTO {
      *
      * @param pneus le type de pneus
      */
-    public void setPneus(String pneus) {
-        this.pneus = pneus;
+    public void setPneus(String pneus)throws EmptyArgumentException {
+        if(pneus.isEmpty()) throw new EmptyArgumentException("Le type de pneus ne peut pas être vide.");
+        else this.pneus = pneus;
     }
 
     /**
@@ -275,8 +289,9 @@ public class MonoplaceDTO {
      *
      * @param poids le poids de la monoplace
      */
-    public void setPoids(double poids) {
-        this.poids = poids;
+    public void setPoids(double poids) throws NegativeArgumentException {
+        if(poids < 0) throw new NegativeArgumentException("Le poids de la monoplace ne peut pas être négatif.");
+        else this.poids = poids;
     }
 
     /**
@@ -293,8 +308,9 @@ public class MonoplaceDTO {
      *
      * @param capaciteMaxReservoir la capacité maximale du réservoir
      */
-    public void setCapaciteMaxReservoir(double capaciteMaxReservoir) {
-        this.capaciteMaxReservoir = capaciteMaxReservoir;
+    public void setCapaciteMaxReservoir(double capaciteMaxReservoir) throws NegativeArgumentException {
+        if(capaciteMaxReservoir < 0) throw new NegativeArgumentException("La capacité maximale du réservoir ne peut pas être négative.");
+        else this.capaciteMaxReservoir = capaciteMaxReservoir;
     }
 
     /**
@@ -311,8 +327,9 @@ public class MonoplaceDTO {
      *
      * @param chassis le type de châssis
      */
-    public void setChassis(String chassis) {
-        this.chassis = chassis;
+    public void setChassis(String chassis) throws EmptyArgumentException {
+        if(chassis.isEmpty()) throw new EmptyArgumentException("Le type de châssis ne peut pas être vide.");
+        else this.chassis = chassis;
     }
 
     /**
@@ -329,8 +346,9 @@ public class MonoplaceDTO {
      *
      * @param suspension le type de suspension
      */
-    public void setSuspension(String suspension) {
-        this.suspension = suspension;
+    public void setSuspension(String suspension) throws EmptyArgumentException {
+        if(suspension.isEmpty()) throw new EmptyArgumentException("Le type de suspension ne peut pas être vide.");
+        else this.suspension = suspension;
     }
 
     /**
@@ -347,8 +365,9 @@ public class MonoplaceDTO {
      *
      * @param fondPlat le type de fond plat
      */
-    public void setFondPlat(String fondPlat) {
-        this.fondPlat = fondPlat;
+    public void setFondPlat(String fondPlat) throws EmptyArgumentException {
+        if(fondPlat.isEmpty()) throw new EmptyArgumentException("Le type de fond plat ne peut pas être vide.");
+        else this.fondPlat = fondPlat;
     }
 
     /**
@@ -365,8 +384,9 @@ public class MonoplaceDTO {
      *
      * @param ingenieurCourse le nom de l'ingénieur de course
      */
-    public void setIngenieurCourse(String ingenieurCourse) {
-        this.ingenieurCourse = ingenieurCourse;
+    public void setIngenieurCourse(String ingenieurCourse) throws EmptyArgumentException {
+        if (ingenieurCourse.isEmpty()) throw new EmptyArgumentException("Le nom de l'ingénieur de course ne peut pas être vide.");
+        else this.ingenieurCourse = ingenieurCourse;
     }
 
     /**
@@ -383,8 +403,9 @@ public class MonoplaceDTO {
      *
      * @param entrepot le nom de l'entrepôt
      */
-    public void setEntrepot(String entrepot) {
-        this.entrepot = entrepot;
+    public void setEntrepot(String entrepot) throws EmptyArgumentException {
+        if(entrepot.isEmpty()) throw new EmptyArgumentException("Le nom de l'entrepôt ne peut pas être vide.");
+        else this.entrepot = entrepot;
     }
 
     /**
@@ -401,7 +422,40 @@ public class MonoplaceDTO {
      *
      * @param pilote le nom du pilote
      */
-    public void setPilote(String pilote) {
-        this.pilote = pilote;
+    public void setPilote(String pilote) throws EmptyArgumentException {
+        if(pilote.isEmpty()) throw new EmptyArgumentException("Le nom du pilote ne peut pas être vide.");
+        else this.pilote = pilote;
+
+    }
+
+    /**
+     * Obtient une représentation textuelle de la monoplace.
+     * @return une représentation textuelle de la monoplace
+     */
+    @Override
+    public String toString() {
+        return "==================== 🏎️ ====================\n" +
+                " Monoplace DTO \n" +
+                "========================================\n" +
+                "    Id Monoplace          = " + idMonoplace + "\n" +
+                "    Nom Monoplace         = '" + nomMonoplace + "'\n" +
+                "    Écurie                = '" + ecurie + "'\n" +
+                "    Nom Moteur            = '" + nomMoteur + "'\n" +
+                "    Modèle Moteur         = '" + modeleMoteur + "'\n" +
+                "    Aileron Avant         = '" + aileronAvant + "'\n" +
+                "    Aileron Arrière       = '" + aileronArriere + "'\n" +
+                "    Freins                = '" + freins + "'\n" +
+                "    Boîte Vitesse         = '" + boiteVitesse + "'\n" +
+                "    Pneus                 = '" + pneus + "'\n" +
+                "    Poids                 = " + poids + " kg\n" +
+                "    Capacité Max Réservoir = " + capaciteMaxReservoir + " L\n" +
+                "    Châssis               = '" + chassis + "'\n" +
+                "    Suspension            = '" + suspension + "'\n" +
+                "    Fond Plat             = '" + fondPlat + "'\n" +
+                "    Ingénieur Course      = '" + ingenieurCourse + "'\n" +
+                "    Entrepôt              = '" + entrepot + "'\n" +
+                "    Pilote                = '" + pilote + "'\n" +
+                "========================================\n" +
+                "==================== 🏎️ ====================";
     }
 }
