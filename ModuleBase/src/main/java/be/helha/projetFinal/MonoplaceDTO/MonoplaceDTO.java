@@ -26,6 +26,22 @@ public class MonoplaceDTO {
     private String pilote;
 
     /**
+     * Constructeur par défaut.
+     */
+    public MonoplaceDTO(){
+        this.nomMoteur = "non défini";
+        this.aileronAvant = "non défini";
+        this.aileronArriere = "non défini";
+        this.freins = "non défini";
+        this.boiteVitesse = "non défini";
+        this.pneus = "non défini";
+        this.poids = 0;
+        this.capaciteMaxReservoir = 0;
+        this.chassis = "non défini";
+        this.suspension = "non défini";
+        this.fondPlat = "non défini";
+    }
+    /**
      * Constructeur avec tous les paramètres.
      *
      * @param nomMonoplace le nom de la monoplace

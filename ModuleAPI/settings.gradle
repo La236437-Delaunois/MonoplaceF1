@@ -1,0 +1,5 @@
+rootProject.name = 'ModuleAPI'
+include(':ModuleBase')
+project(':ModuleBase').projectDir = new File(settingsDir,'../ModuleBase')
+
+
