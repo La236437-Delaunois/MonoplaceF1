@@ -45,7 +45,7 @@ public class TestMonoplaceDAO {
     void testSupprimerMonoplace() {
         MonoplaceDTO monoplace = new MonoplaceDTO("SF-24", "Ferrari", "Charles Leclerc", "Bryan Bozzi", "Maranello");
         instance.ajouterMonoplace(monoplace);
-        instance.supprimerMonoplace(0);
+        instance.supprimerMonoplace(1);
         assertEquals(0, instance.obtenirToutesLesMonoplaces().size());
     }
 
@@ -82,7 +82,7 @@ public class TestMonoplaceDAO {
         instance.ajouterMonoplace(monoplace);
         monoplace.setNomMonoplace("SF-25");
         instance.modifierMonoplace(monoplace);
-        assertEquals("SF-25", instance.obtenirMonoplaceParId(0).getNomMonoplace());
+        assertEquals("SF-25", instance.obtenirMonoplaceParId(1).getNomMonoplace());
     }
 
     /**
@@ -112,7 +112,7 @@ public class TestMonoplaceDAO {
     void testObtenirMonoplaceParId() {
         MonoplaceDTO monoplace = new MonoplaceDTO("SF-24", "Ferrari", "Charles Leclerc", "Bryan Bozzi", "Maranello");
         instance.ajouterMonoplace(monoplace);
-        assertEquals("SF-24", instance.obtenirMonoplaceParId(0).getNomMonoplace());
+        assertEquals("SF-24", instance.obtenirMonoplaceParId(1).getNomMonoplace());
     }
 
     /**

@@ -88,6 +88,7 @@ public class MonoplaceDAOImpl implements MonoplaceDAO {
             try (var rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
                     monoplace.setIdMonoplace(rs.getInt(1));
+
                 }
                 rs.close();
             }
@@ -155,19 +156,26 @@ public class MonoplaceDAOImpl implements MonoplaceDAO {
      */
     @Override
     public MonoplaceDTO obtenirMonoplaceParId(int id) {
-        try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Monoplace WHERE id = " + id);
-            rs.next();
-            MonoplaceDTO monoplace = new MonoplaceDTO(rs.getString("nomMonoplace"), rs.getString("ecurie"), rs.getString("nomMoteur"), rs.getString("aileronAvant"), rs.getString("aileronArriere"), rs.getString("freins"), rs.getString("boiteVitesse"), rs.getString("pneus"), rs.getDouble("poids"), rs.getDouble("capaciteMaxReservoir"), rs.getString("chassis"), rs.getString("suspension"), rs.getString("fondPlat"), rs.getString("ingenieurCourse"), rs.getString("entrepot"), rs.getString("pilote"));
-            monoplace.setIdMonoplace(rs.getInt("id"));
-            rs.close();
-            stmt.close();
-            return monoplace;
+        MonoplaceDTO monoplace = null;
+        String query = "SELECT * FROM Monoplace WHERE id = ?";
+        try (
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    monoplace = new MonoplaceDTO();
+                    monoplace.setIdMonoplace(resultSet.getInt("id"));
+                    monoplace.setNomMonoplace(resultSet.getString("nomMonoplace"));
+                    monoplace.setEcurie(resultSet.getString("ecurie"));
+                    monoplace.setPilote(resultSet.getString("pilote"));
+                    monoplace.setIngenieurCourse(resultSet.getString("ingenieurCourse"));
+                    monoplace.setEntrepot(resultSet.getString("entrepot"));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return monoplace;
     }
 
     /**
@@ -212,7 +220,7 @@ public class MonoplaceDAOImpl implements MonoplaceDAO {
     public void resetId(){
         try{
             Statement stmt = connection.createStatement();
-            stmt.executeUpdate("DBCC CHECKIDENT ('Monoplace', RESEED, -1)");
+            stmt.executeUpdate("DBCC CHECKIDENT ('Monoplace', RESEED, 0)");
             stmt.close();
         }catch (SQLException e){
             e.printStackTrace();
